@@ -19,128 +19,11 @@ cameron *at* udacity *dot* com
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
 var pizzaIngredients = {};
-pizzaIngredients.meats = [
-  "Pepperoni",
-  "Sausage",
-  "Fennel Sausage",
-  "Spicy Sausage",
-  "Chicken",
-  "BBQ Chicken",
-  "Chorizo",
-  "Chicken Andouille",
-  "Salami",
-  "Tofu",
-  "Bacon",
-  "Canadian Bacon",
-  "Proscuitto",
-  "Italian Sausage",
-  "Ground Beef",
-  "Anchovies",
-  "Turkey",
-  "Ham",
-  "Venison",
-  "Lamb",
-  "Duck",
-  "Soylent Green",
-  "Carne Asada",
-  "Soppressata Picante",
-  "Coppa",
-  "Pancetta",
-  "Bresola",
-  "Lox",
-  "Guanciale",
-  "Chili",
-  "Beef Jerky",
-  "Pastrami",
-  "Kielbasa",
-  "Scallops",
-  "Filet Mignon"
-];
-pizzaIngredients.nonMeats = [
-  "White Onions",
-  "Red Onions",
-  "Sauteed Onions",
-  "Green Peppers",
-  "Red Peppers",
-  "Banana Peppers",
-  "Ghost Peppers",
-  "Habanero Peppers",
-  "Jalapeno Peppers",
-  "Stuffed Peppers",
-  "Spinach",
-  "Tomatoes",
-  "Pineapple",
-  "Pear Slices",
-  "Apple Slices",
-  "Mushrooms",
-  "Arugula",
-  "Basil",
-  "Fennel",
-  "Rosemary",
-  "Cilantro",
-  "Avocado",
-  "Guacamole",
-  "Salsa",
-  "Swiss Chard",
-  "Kale",
-  "Sun Dried Tomatoes",
-  "Walnuts",
-  "Artichoke",
-  "Asparagus",
-  "Caramelized Onions",
-  "Mango",
-  "Garlic",
-  "Olives",
-  "Cauliflower",
-  "Polenta",
-  "Fried Egg",
-  "Zucchini",
-  "Hummus"
-];
-pizzaIngredients.cheeses = [
-  "American Cheese",
-  "Swiss Cheese",
-  "Goat Cheese",
-  "Mozzarella Cheese",
-  "Parmesean Cheese",
-  "Velveeta Cheese",
-  "Gouda Cheese",
-  "Muenster Cheese",
-  "Applewood Cheese",
-  "Asiago Cheese",
-  "Bleu Cheese",
-  "Boursin Cheese",
-  "Brie Cheese",
-  "Cheddar Cheese",
-  "Chevre Cheese",
-  "Havarti Cheese",
-  "Jack Cheese",
-  "Pepper Jack Cheese",
-  "Gruyere Cheese",
-  "Limberger Cheese",
-  "Manchego Cheese",
-  "Marscapone Cheese",
-  "Pecorino Cheese",
-  "Provolone Cheese",
-  "Queso Cheese",
-  "Roquefort Cheese",
-  "Romano Cheese",
-  "Ricotta Cheese",
-  "Smoked Gouda"
-];
-pizzaIngredients.sauces = [
-  "Red Sauce",
-  "Marinara",
-  "BBQ Sauce",
-  "No Sauce",
-  "Hot Sauce"
-];
-pizzaIngredients.crusts = [
-  "White Crust",
-  "Whole Wheat Crust",
-  "Flatbread Crust",
-  "Stuffed Crust"
-];
+pizzaIngredients.meats = ["Pepperoni","Sausage","Fennel Sausage","Spicy Sausage","Chicken","BBQ Chicken","Chorizo","Chicken Andouille","Salami","Tofu","Bacon","Canadian Bacon","Proscuitto","Italian Sausage","Ground Beef","Anchovies","Turkey","Ham","Venison","Lamb","Duck","Soylent Green","Carne Asada","Soppressata Picante","Coppa","Pancetta","Bresola","Lox","Guanciale","Chili","Beef Jerky","Pastrami","Kielbasa","Scallops","Filet Mignon"];
+pizzaIngredients.nonMeats = ["White Onions","Red Onions","Sauteed Onions","Green Peppers","Red Peppers","Banana Peppers","Ghost Peppers","Habanero Peppers","Jalapeno Peppers","Stuffed Peppers","Spinach","Tomatoes","Pineapple","Pear Slices","Apple Slices","Mushrooms","Arugula","Basil","Fennel","Rosemary","Cilantro","Avocado","Guacamole","Salsa","Swiss Chard","Kale","Sun Dried Tomatoes","Walnuts","Artichoke","Asparagus","Caramelized Onions","Mango","Garlic","Olives","Cauliflower","Polenta","Fried Egg","Zucchini","Hummus"];
+pizzaIngredients.cheeses = ["American Cheese","Swiss Cheese","Goat Cheese","Mozzarella Cheese","Parmesean Cheese","Velveeta Cheese","Gouda Cheese","Muenster Cheese","Applewood Cheese","Asiago Cheese","Bleu Cheese","Boursin Cheese","Brie Cheese","Cheddar Cheese","Chevre Cheese","Havarti Cheese","Jack Cheese","Pepper Jack Cheese","Gruyere Cheese","Limberger Cheese","Manchego Cheese","Marscapone Cheese","Pecorino Cheese","Provolone Cheese","Queso Cheese","Roquefort Cheese","Romano Cheese","Ricotta Cheese","Smoked Gouda"];
+pizzaIngredients.sauces = ["Red Sauce","Marinara","BBQ Sauce","No Sauce","Hot Sauce"];
+pizzaIngredients.crusts = ["White Crust","Whole Wheat Crust","Flatbread Crust","Stuffed Crust"];
 
 // Name generator pulled from http://saturdaykid.com/usernames/generator.html
 // Capitalizes first letter of each word
@@ -450,11 +333,12 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
+    //moved these from inside the loop. Because all of the sizes are the same I just reference the first pizza size as a reference.
+	var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[0], size);
+	var newwidth = (document.querySelectorAll(".randomPizzaContainer")[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-    }
+	}
   }
 
   changePizzaSizes(size);
@@ -503,9 +387,11 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+  var phase = Math.sin(document.body.scrollTop / 1250); //Moved calculation outside of loop
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    //Performance indicators showed performance issues in this area Check these next few lines 
+	//var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    items[i].style.left = items[i].basicLeft + 100 * (phase + (i % 5)) + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -525,7 +411,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 46; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
